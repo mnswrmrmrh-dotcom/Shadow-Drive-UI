@@ -1,25 +1,20 @@
 // =========================================================
-// 🦾 Shadow Drive - الواجهة الأمامية (بدون شاشة دخول)
+// 🦾 Shadow Drive - النسخة النهائية
 // =========================================================
 
-// 🔥 الرابط الصحيح للخادم الخلفي
-const API_URL = 'https://script.google.com/macros/s/AKfycbx0TlziqpBtdbQtMQEgxbMZwMi1SUO9uwNe0rylGIly9FtRJ8b8T_evFD68ENqDN6r6/exec';
-
-// 🥷 تم تثبيت المعرف تلقائياً (لن يطلب منك إدخاله مجدداً)
-const ADMIN_KEY = '8593367876';
+// 🔥 الرابط الجديد (تم النشر في 9 أغسطس 2026، 11:52 مساءً)
+const API_URL = 'https://script.google.com/macros/s/AKfycbz5HUMuRUoL9S7PTu6_YufyHtTpIKvik-bCyuo7B0zMnqju3N2zCoemouwMaNqqrtEO/exec';
 
 let currentFolder = 'root';
 let pendingFiles = [];
 
-// ---------- بدء التشغيل بدون مصادقة ----------
 window.onload = function() {
     refreshFiles();
     setupDragDrop();
 };
 
-// ---------- الاتصال بالخادم ----------
 async function callAPI(action, payload = {}) {
-    const params = new URLSearchParams({ action, adminId: ADMIN_KEY, ...payload });
+    const params = new URLSearchParams({ action, ...payload });
     const url = `${API_URL}?${params.toString()}`;
     try {
         const response = await fetch(url);
@@ -33,7 +28,6 @@ async function callAPI(action, payload = {}) {
     }
 }
 
-// ---------- جلب وعرض الملفات ----------
 async function refreshFiles() {
     const grid = document.getElementById('fileGrid');
     grid.innerHTML = '<div class="loading">⏳ تحميل...</div>';
@@ -66,7 +60,6 @@ async function refreshFiles() {
     });
 }
 
-// ---------- السحب والإفلات ----------
 function setupDragDrop() {
     const dropZone = document.getElementById('dropZone');
     ['dragenter','dragover'].forEach(ev => dropZone.addEventListener(ev, e => { e.preventDefault(); dropZone.classList.add('dragover'); }));
@@ -113,7 +106,13 @@ async function uploadFileWithBackup(file) {
     const reader = new FileReader();
     reader.onload = async function(e) {
         const base64 = e.target.result.split(',')[1];
-        const payload = { fileName: file.name, mimeType: file.type || 'application/octet-stream', base64: base64, folder: currentFolder, backup: true };
+        const payload = { 
+            fileName: file.name, 
+            mimeType: file.type || 'application/octet-stream', 
+            base64: base64, 
+            folder: currentFolder, 
+            backup: true
+        };
         const result = await callAPI('uploadFile', payload);
         if (result?.status === 'success') {
             document.querySelectorAll('.preview-item').forEach(el => {
@@ -131,7 +130,6 @@ async function uploadFileWithBackup(file) {
     reader.readAsDataURL(file);
 }
 
-// ---------- أوامر أخرى ----------
 async function deleteFile(fileId, event) {
     event.stopPropagation();
     if (!confirm('حذف؟')) return;
@@ -156,7 +154,4 @@ async function searchFiles() {
     refreshFiles();
 }
 
-function logout() { 
-    // مجرد إعادة تحميل الصفحة (لا يوجد خروج فعلي لأننا أزلنا المصادقة)
-    location.reload(); 
-    }
+function logout() { location.reload(); }
