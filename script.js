@@ -1,9 +1,10 @@
 // =========================================================
-// 🦾 Shadow Drive - الواجهة الأمامية
+// 🦾 Shadow Drive - الواجهة الأمامية (معدل بالرابط الجديد)
 // =========================================================
 
-// ⚠️ هام جداً: ضع هنا رابط تطبيق Google Apps Script الخاص بك بعد نشره
-const API_URL = 'https://script.google.com/macros/s/AKfycbx0TlziqpBtdbQtMQEgxbMZwMi1SUO9uwNe0ryIGIly9FtRJ8b8T_evFD68ENqDN6r6/exec'; 
+// 🔥 الرابط الجديد للخادم الخلفي (تم التحديث)
+const API_URL = 'https://script.google.com/macros/s/AKfycbx0TlziqpBtdbQtMQEgxbMZwMi1SUO9uwNe0ryIGIly9FtRJ8b8T_evFD68ENqDN6r6/exec';
+
 let ADMIN_KEY = localStorage.getItem('shadow_admin_key') || '';
 let currentFolder = 'root';
 let pendingFiles = [];
@@ -123,7 +124,6 @@ async function uploadFileWithBackup(file) {
         const payload = { fileName: file.name, mimeType: file.type || 'application/octet-stream', base64: base64, folder: currentFolder, backup: true };
         const result = await callAPI('uploadFile', payload);
         if (result?.status === 'success') {
-            // تحديث المعاينة بعلامة نجاح
             document.querySelectorAll('.preview-item').forEach(el => {
                 if (el.querySelector('.file-name-preview')?.innerText.includes(file.name.substr(0,12))) {
                     el.style.border = '2px solid #00ffcc';
@@ -159,7 +159,6 @@ async function searchFiles() {
     if (!query) return refreshFiles();
     const result = await callAPI('searchFiles', { query });
     alert(`🔍 تم العثور على ${result?.length || 0} نتيجة.`);
-    // لعرضها بشكل مبسط، نعيد تحميل الجذر
     currentFolder = 'root';
     document.getElementById('currentPath').innerText = '📂 الجذر';
     refreshFiles();
