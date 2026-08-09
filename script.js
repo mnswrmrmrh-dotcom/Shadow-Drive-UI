@@ -1,27 +1,19 @@
 // =========================================================
-// 🦾 Shadow Drive - الواجهة الأمامية (معدل بالرابط الجديد)
+// 🦾 Shadow Drive - الواجهة الأمامية (بدون شاشة دخول)
 // =========================================================
 
-// 🔥 الرابط الجديد للخادم الخلفي (تم التحديث)
-const API_URL = 'https://script.google.com/macros/s/AKfycbx0TlziqpBtdbQtMQEgxbMZwMi1SUO9uwNe0ryIGIly9FtRJ8b8T_evFD68ENqDN6r6/exec';
+// 🔥 الرابط الصحيح للخادم الخلفي
+const API_URL = 'https://script.google.com/macros/s/AKfycbx0TlziqpBtdbQtMQEgxbMZwMi1SUO9uwNe0rylGIly9FtRJ8b8T_evFD68ENqDN6r6/exec';
 
-let ADMIN_KEY = localStorage.getItem('shadow_admin_key') || '';
+// 🥷 تم تثبيت المعرف تلقائياً (لن يطلب منك إدخاله مجدداً)
+const ADMIN_KEY = '8593367876';
+
 let currentFolder = 'root';
 let pendingFiles = [];
 
-// ---------- المصادقة ----------
-function authenticate() {
-    const key = document.getElementById('adminKey').value.trim();
-    if (!key) return alert('أدخل المفتاح!');
-    ADMIN_KEY = key;
-    localStorage.setItem('shadow_admin_key', key);
-    document.getElementById('authModal').style.display = 'none';
-    refreshFiles();
-}
-
+// ---------- بدء التشغيل بدون مصادقة ----------
 window.onload = function() {
-    if (ADMIN_KEY) { document.getElementById('authModal').style.display = 'none'; refreshFiles(); }
-    else { document.getElementById('authModal').style.display = 'flex'; }
+    refreshFiles();
     setupDragDrop();
 };
 
@@ -164,4 +156,7 @@ async function searchFiles() {
     refreshFiles();
 }
 
-function logout() { localStorage.removeItem('shadow_admin_key'); location.reload(); }
+function logout() { 
+    // مجرد إعادة تحميل الصفحة (لا يوجد خروج فعلي لأننا أزلنا المصادقة)
+    location.reload(); 
+    }
