@@ -25,5 +25,3 @@ body { background: #0d0d0d; color: #eee; direction: rtl; }
 .file-card .delete-btn { position: absolute; top: 5px; right: 5px; background: rgba(255,0,0,0.8); border: none; color: #fff; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; display: none; }
 .file-card:hover .delete-btn { display: block; }
 .loading { grid-column: 1 / -1; text-align: center; color: #888; padding: 50px; }
-
-/* تم حذف أنماط الـ Modal الخاصة بنافذة الدخول نهائياً */
