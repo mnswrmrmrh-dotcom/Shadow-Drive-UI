@@ -3,7 +3,7 @@
 // =========================================================
 
 // ⚠️ هام جداً: ضع هنا رابط تطبيق Google Apps Script الخاص بك بعد نشره
-const API_URL = 'https://script.google.com/macros/s/AKfy.../exec'; 
+const API_URL = 'https://script.google.com/macros/s/AKfycbx0TlziqpBtdbQtMQEgxbMZwMi1SUO9uwNe0ryIGIly9FtRJ8b8T_evFD68ENqDN6r6/exec'; 
 let ADMIN_KEY = localStorage.getItem('shadow_admin_key') || '';
 let currentFolder = 'root';
 let pendingFiles = [];
